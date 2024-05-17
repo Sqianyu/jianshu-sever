@@ -7,6 +7,12 @@ router.prefix('/users')
 router.post('/login', userCtl.login)
 //注册
 router.post('/reg', userCtl.reg)
+//验证登录
+router.post('/verify', userCtl.verify)
+//修改资料
+router.post('/update/pwd', userCtl.updatePwd)
+//updatePersonal
+router.post('/update/personal', userCtl.updatePersonal)
 //添加
 router.post('/add', userCtl.userAdd)
 
