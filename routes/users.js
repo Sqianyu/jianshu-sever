@@ -23,7 +23,7 @@ router.post('/update', userCtl.userUpdate)
 router.post('/del', userCtl.userDel)
 
 //查询所以
-router.post('/find', userCtl.userFind)
+router.post('/userFindList', userCtl.userFindList)
 //查询单个
-router.post('/find/:id', userCtl.userFindOne)
+router.post('/userFind', userCtl.userFind)
 module.exports = router

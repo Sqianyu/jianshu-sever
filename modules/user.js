@@ -32,6 +32,10 @@ const userSchema = new mongoose.Schema({
     email: {
         type: String,
         default: ''
+    },
+    headImg: {
+        type: String,
+        default: 'http://127.0.0.1:3000/images/head.png'
     }
 })
 const User = mongoose.model('users', userSchema)

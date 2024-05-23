@@ -67,6 +67,7 @@ const find = (model, where, ctx) =>
     .find(where)
     .then((rel) => {
       ctx.body = {
+        code: 200,
         result: rel,
       };
     })
@@ -83,6 +84,7 @@ const findOne = (model, where, ctx) =>
     .findOne(where)
     .then((rel) => {
       ctx.body = {
+        code: 200,
         result: rel,
       };
     })

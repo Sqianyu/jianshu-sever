@@ -19,33 +19,33 @@ const userDel = async (ctx) => {
   await util.del(User,{_id},ctx)
 };
 
-const userFind = async (ctx) => {
+const userFindList = async (ctx) => {
   await util.find(User,null,ctx);
 };
 
-const userFindOne = async (ctx) => {
-  await  util.findOne(User,{ _id: ctx.params.id },ctx);
+const userFind = async (ctx) => {
+  let {_id} = ctx.request.body;
+  await  util.findOne(User,{ _id},ctx);
 };
 
 const login = async (ctx) => {
   let {username, pwd} = ctx.request.body;
   await  User.findOne({username, pwd}).then(rel => {
     if (rel) {
-      let user = {
-        username: 'admin',
-        pwd: '123'
-      }
+      let user = { username, pwd }
+      console.log(user);
       let token = jwt.sign({
         username: user.username,
         _id: rel._id
-      }, 'jianshu-server-jwt',{
+      }, 'server-jwt',{
         expiresIn: 3600 * 24 * 7
       })
 
       ctx.body = {
         code: 200,
         msg: '登录成功',
-        token
+        token,
+        _id: rel._id
       }
     } else {
       ctx.body = {
@@ -102,7 +102,7 @@ const verify = async (ctx) => {
   let token = ctx.header.authorization;
   token = token.split(" ")[1];
 
-  let result = jwt.verify(token,'jianshu-server-jwt')
+  let result = jwt.verify(token,'server-jwt')
     await  User.findOne({_id: result._id}).then(rel => {
       if (rel) {
         ctx.body = {
@@ -180,4 +180,4 @@ const updatePersonal = async (ctx) => {
     }
   });
 }
-module.exports = { userAdd, userUpdate, userDel, userFind, userFindOne, login, reg, verify, updatePwd, updatePersonal };
+module.exports = { userAdd, userUpdate, userDel, userFind, userFindList, login, reg, verify, updatePwd, updatePersonal };
