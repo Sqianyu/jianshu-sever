@@ -6,7 +6,7 @@ const mongoose = require('mongoose')
 // })
 
 // const Obj = mongoose.model('names', schema)
-
+const url = process.env.npm_lifecycle_event == 'prd' ? 'http://39.101.1.217:3000' : 'http://127.0.0.1:3000'
 const userSchema = new mongoose.Schema({
     username: String,
     pwd: {
@@ -35,7 +35,7 @@ const userSchema = new mongoose.Schema({
     },
     headImg: {
         type: String,
-        default: 'http://127.0.0.1:3000/images/head.png'
+        default: url + '/images/head.png'
     }
 })
 const User = mongoose.model('users', userSchema)
